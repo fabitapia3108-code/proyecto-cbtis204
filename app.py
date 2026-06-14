@@ -1,186 +1,276 @@
-from flask import Flask, render_template_string, request, jsonify
+from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# Base de datos temporal para guardar las dudas de los interesados
-prospectos = [
-    {"nombre": "Diana Martínez", "mensaje": "¿Tienen turno vespertino para la carrera de Ofimática?"},
-    {"nombre": "Kevin Torres", "mensaje": "¿Cuáles son los requisitos para la preinscripción?"}
-]
-
-# Diseño Visual enfocado en Promoción Institucional (HTML + CSS + JS Puro)
-HTML_LAYOUT = """
+# --- DISEÑO BASE (HTML/CSS) CON COLORES INSTITUCIONALES, REDES Y DIRECCIÓN REAL ---
+BASE_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admisiones 2026 - CBTis 204</title>
+    <title>CBTis 204 - Sitio Oficial Promocional</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f7f9fc; color: #333; }
-        header { background-color: #800020; color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-        header h1 { font-size: 28px; margin-bottom: 5px; letter-spacing: 1px; }
-        header p { font-size: 16px; opacity: 0.9; }
-        .container { max-width: 850px; margin: 30px auto; padding: 0 20px; }
-        .card { background: white; padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { color: #800020; margin-bottom: 15px; border-bottom: 2px solid #800020; padding-bottom: 5px; font-size: 20px; }
-        p { line-height: 1.6; margin-bottom: 10px; }
+        body { background-color: #f4f4f4; color: #333; line-height: 1.6; }
         
-        /* Lista de Carreras */
-        .carreras-list { list-style: none; margin-top: 10px; }
-        .carreras-list li { background: #f1f5f9; padding: 10px 15px; margin-bottom: 8px; border-left: 5px solid #b38f4f; border-radius: 4px; font-weight: 500; }
+        /* Barra de Navegación (Negro y Guinda) */
+        header { background-color: #111; color: #fff; padding: 15px 0; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid #6A1B29; }
+        .nav-container { width: 85%; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: #fff; }
+        .logo span { color: #6A1B29; }
+        nav a { color: #ddd; text-decoration: none; margin-left: 20px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px; }
+        nav a:hover, nav a.active { color: #fff; background-color: #6A1B29; }
         
-        /* Formulario e Interactividad */
+        /* Secciones Principales */
+        .container { width: 85%; margin: 30px auto; min-height: 65vh; }
+        .card { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 5px solid #6A1B29; margin-bottom: 30px; }
+        
+        h1, h2, h3 { color: #6A1B29; margin-bottom: 20px; }
+        p { margin-bottom: 15px; font-size: 17px; text-align: justify; }
+        
+        /* Contenedor de Contacto */
+        .contact-info { background-color: #f8f9fa; padding: 20px; border-radius: 6px; border: 1px solid #dee2e6; margin-top: 15px; }
+        .contact-item { margin-bottom: 10px; font-size: 16px; }
+        .contact-item strong { color: #111; }
+        
+        /* Estilos de Oferta Educativa */
+        .grid-carreras { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .carrera-card { background: #e9ecef; border: 1px solid #dee2e6; padding: 25px; border-radius: 6px; text-align: center; transition: 0.3s; }
+        .carrera-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-color: #6A1B29; }
+        .carrera-card h3 { color: #111; margin-bottom: 10px; }
+        .badge { background: #6A1B29; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; display: inline-block; margin-top: 10px; }
+        
+        /* Formularios e Interactivos */
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
-        button { background-color: #800020; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; transition: background 0.3s; }
-        button:hover { background-color: #5a0016; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        button { background-color: #6A1B29; color: white; border: none; padding: 12px 20px; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; }
+        button:hover { background-color: #4A121A; }
+        .resultado { background-color: #e2f0d9; color: #385723; padding: 20px; border-radius: 4px; margin-top: 15px; border-left: 4px solid #70ad47; }
+        .resultado ul { margin-left: 20px; margin-top: 10px; }
         
-        /* Diagnóstico */
-        #resultadoTest { margin-top: 15px; padding: 15px; border-radius: 6px; display: none; text-align: center; font-weight: bold; line-height: 1.5; }
-        .perfil-alto { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .perfil-medio { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-        
-        /* Mensajes */
-        .comentario-item { background: #f8f9fa; padding: 12px; margin-bottom: 12px; border-left: 4px solid #800020; border-radius: 6px; }
-        .comentario-item strong { color: #800020; display: block; margin-bottom: 3px; }
-        footer { text-align: center; padding: 25px; color: #666; font-size: 14px; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+        /* Pie de Página con Redes Sociales */
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 30px 0; margin-top: 40px; border-top: 4px solid #6A1B29; font-size: 14px; }
+        .footer-content { width: 85%; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .social-links { display: flex; gap: 15px; margin-top: 5px; }
+        .social-btn { background-color: #333; color: #fff; padding: 8px 18px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 13px; transition: 0.3s; border: 1px solid #444; }
+        .social-btn:hover { background-color: #6A1B29; border-color: #6A1B29; color: #fff; }
+        .footer-text { margin: 2px 0; color: #888; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>¡Únete al CBTis 204!</h1>
-        <p>Tu futuro profesional comienza aquí | Portal Oficial de Admisiones e Informes</p>
+        <div class="nav-container">
+            <div class="logo">CBTis <span>204</span></div>
+            <nav>
+                <a href="/" class="{{ 'active' if page == 'inicio' else '' }}">Inicio</a>
+                <a href="/nosotros" class="{{ 'active' if page == 'nosotros' else '' }}">Nosotros</a>
+                <a href="/oferta" class="{{ 'active' if page == 'oferta' else '' }}">Oferta Educativa</a>
+                <a href="/inscripcion" class="{{ 'active' if page == 'inscripcion' else '' }}">Inscripción</a>
+            </nav>
+        </div>
     </header>
 
     <div class="container">
-        <div class="card">
-            <h2>¿Por qué elegir el CBTis 204?</h2>
-            <p>Somos una institución de educación media superior comprometida con la excelencia académica y tecnológica. Ofrecemos bachillerato técnico que te prepara para trabajar o continuar tus estudios universitarios.</p>
-            <h3 style="margin: 15px 0 10px 0; color: #b38f4f;">Nuestras Carreras Técnicas:</h3>
-            <ul class="carreras-list">
-                <li>💻 Técnico en Ofimática (Gestión y Sistemas Interconectados)</li>
-                <li>🛠️ Técnico en Mantenimiento Industrial</li>
-                <li>📊 Técnico en Contabilidad</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Simulador de Perfil Técnico</h2>
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">¿Te interesa la tecnología o la administración? Selecciona tu nivel de interés para ver si la carrera de Ofimática es ideal para ti.</p>
-            <div class="form-group">
-                <label for="interesComputo">¿Qué tanto te gusta usar computadoras y software? (1 al 10):</label>
-                <input type="number" id="interesComputo" min="1" max="10" placeholder="Ej. 9">
-            </div>
-            <div class="form-group">
-                <label for="interesAdmin">¿Te interesa la organización de oficinas y proyectos? (1 al 10):</label>
-                <input type="number" id="interesAdmin" min="1" max="10" placeholder="Ej. 8">
-            </div>
-            <button onclick="evaluarPerfil()">Verificar mi Afinidad</button>
-            <div id="resultadoTest"></div>
-        </div>
-
-        <div class="card">
-            <h2>Módulo de Atención y Dudas</h2>
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">¿Tienes dudas sobre los costos, fichas o planteles? Déjanos tu pregunta y nuestro director de proyecto te responderá en breve.</p>
-            <form id="formProspecto">
-                <div class="form-group">
-                    <label for="nombre">Nombre Completo del Aspirante:</label>
-                    <input type="text" id="nombre" required placeholder="Ej. Carlos González">
-                </div>
-                <div class="form-group">
-                    <label for="mensaje">¿Cuál es tu duda o comentario?:</label>
-                    <textarea id="mensaje" rows="3" required placeholder="Escribe aquí tu pregunta detallada..."></textarea>
-                </div>
-                <button type="submit">Enviar Pregunta al Plantel</button>
-            </form>
-
-            <h3 style="margin-top: 25px; margin-bottom: 12px; color: #444; font-size: 16px;">Preguntas Frecuentes de la Comunidad:</h3>
-            <div id="listaDudas">
-                {% for p in prospectos %}
-                <div class="comentario-item">
-                    <strong>Aspirante: {{ p.nombre }}</strong>
-                    <span>{{ p.mensaje }}</span>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+        {% block content %}{% endblock %}
     </div>
 
     <footer>
-        <p>&copy; 2026 CBTis 204 - Especialidad de Ofimática</p>
-        <p style="font-size: 11px; margin-top: 5px; color: #999;">Proyecto Escolar de Interconexión de Servicios en la Nube desarrollado para el Profe Abner.</p>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.facebook.com/Cbtis204/" target="_blank" class="social-btn">📘 Facebook Oficial</a>
+                <a href="https://uemstis.sep.gob.mx/" target="_blank" class="social-btn">🌐 Portal UEMSTIS</a>
+            </div>
+            <p class="footer-text" style="color: #bbb; margin-top: 5px;">📍 Km 39 carr. Maravatio-Tlalpujahua, Tlalpujahua de Rayón, México, CP 61060</p>
+            <p class="footer-text">📞 Teléfono: 711 158 0213 | ✉️ Correo: cbtis204.subdir@dgeti.sems.gob.mx</p>
+            <p class="footer-text" style="margin-top: 10px; font-size: 12px;">&copy; 2026 CBTis 204. Desarrollado para el Proyecto Escolar. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <script>
-        // Lógica interactiva con JavaScript Puro
-        function evaluarPerfil() {
-            const comp = parseInt(document.getElementById('interesComputo').value);
-            const admin = parseInt(document.getElementById('interesAdmin').value);
-            
-            if (isNaN(comp) || isNaN(admin) || comp < 1 || comp > 10 || admin < 1 || admin > 10) {
-                alert('Por favor, ingresa números válidos entre 1 y 10.');
-                return;
-            }
-            
-            const promedio = (comp + admin) / 2;
-            const resDiv = document.getElementById('resultadoTest');
-            resDiv.style.display = 'block';
-            
-            if (promedio >= 7.0) {
-                resDiv.className = 'perfil-alto';
-                resDiv.innerHTML = '¡Excelente Perfil! Tienes una afinidad del ' + (promedio*10) + '% con la carrera de Ofimática. ¡Te esperamos en el CBTis 204!';
-            } else {
-                resDiv.className = 'perfil-medio';
-                resDiv.innerHTML = 'Perfil General: Tienes habilidades útiles para cualquiera de nuestros bachilleratos técnicos. ¡Acepta el reto!';
-            }
-        }
-
-        // Conexión dinámica con el backend en Python (Flask)
-        document.getElementById('formProspecto').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const mensaje = document.getElementById('mensaje').value;
-
-            const response = await fetch('/api/prospecto', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre, mensaje })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                document.getElementById('nombre').value = '';
-                document.getElementById('mensaje').value = '';
-                
-                const lista = document.getElementById('listaDudas');
-                lista.innerHTML = '';
-                data.forEach(p => {
-                    const div = document.createElement('div');
-                    div.className = 'comentario-item';
-                    div.innerHTML = `<strong>Aspirante: \${p.nombre}</strong><span>\${p.mensaje}</span>`;
-                    lista.appendChild(div);
-                });
-            }
-        });
-    </script>
 </body>
 </html>
 """
 
+# --- RUTA 1: INICIO (BIENVENIDA E INTRODUCCIÓN) ---
 @app.route('/')
-def home():
-    return render_template_string(HTML_LAYOUT, prospectos=prospectos)
+def inicio():
+    content = """
+    <div class="card">
+        <h1>¡Bienvenidos al Sitio Oficial del CBTis 204!</h1>
+        <p>Es un honor darles la más cordial bienvenida a nuestra plataforma digital informativa. El Centro de Bachillerato Tecnológico industrial y de servicios No. 204 es una institución comprometida firmemente con la excelencia académica, la innovación tecnológica y la formación integral de nuestros jóvenes estudiantes.</p>
+        <p>Aquí encontrarás toda la información relevante sobre nuestro plantel, los procesos de nuevo ingreso, y las herramientas necesarias para conocer de cerca el gran futuro profesional que te espera dentro de nuestra comunidad escolar.</p>
+        
+        <div class="contact-info">
+            <h3>📍 Información de Contacto y Ubicación</h3>
+            <div class="contact-item"><strong>Plantel:</strong> Centro de Bachillerato Tecnológico industrial y de servicios No. 204 (CBTis 204)</div>
+            <div class="contact-item"><strong>Dirección:</strong> Km 39 carr. Maravatio-Tlalpujahua, Tlalpujahua de Rayón, México, CP 61060</div>
+            <div class="contact-item"><strong>Teléfono:</strong> 711 158 0213</div>
+            <div class="contact-item"><strong>Correo Institucional:</strong> cbtis204.subdir@dgeti.sems.gob.mx</div>
+        </div>
+    </div>
+    
+    <div class="card" style="border-left-color: #333;">
+        <h2>Buzón de Dudas para Alumnos y Padres</h2>
+        <form action="/contacto" method="POST">
+            <div class="form-group">
+                <label>Nombre Completo:</label>
+                <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="form-group">
+                <label>Correo Electrónico:</label>
+                <input type="email" name="correo" placeholder="ejemplo@correo.com" required>
+            </div>
+            <div class="form-group">
+                <label>Escribe tu duda o comentario:</label>
+                <textarea name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+            </div>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </div>
+    """
+    return render_template_string(BASE_TEMPLATE, content=content, page='inicio')
 
-@app.route('/api/prospecto', methods=['POST'])
-def agregar_prospecto():
-    data = request.get_json()
-    if data and 'nombre' in data and 'mensaje' in data:
-        prospectos.insert(0, data)
-    return jsonify(prospectos)
+# --- RUTA DE CONTACTO (PROCESAR FORMULARIO) ---
+@app.route('/contacto', methods=['POST'])
+def contacto():
+    nombre = request.form.get('nombre')
+    content = f"""
+    <div class="card">
+        <h1>¡Mensaje Recibido con Éxito!</h1>
+        <div class="resultado" style="background-color: #d4edda; color: #155724; border-left-color: #28a745;">
+            Gracias por escribirnos, <strong>{nombre}</strong>. Tu duda ha sido registrada en el sistema escolar de manera exitosa. Nos pondremos en contacto contigo muy pronto a través del correo proporcionado.
+        </div>
+        <br>
+        <a href="/" style="display:inline-block; background:#111; color:white; padding:10px 20px; text-decoration:none; border-radius:4px; font-weight:bold;">Volver al Inicio</a>
+    </div>
+    """
+    return render_template_string(BASE_TEMPLATE, content=content, page='inicio')
+
+# --- RUTA 2: NOSOTROS (MISIÓN Y VISIÓN) ---
+@app.route('/nosotros')
+def nosotros():
+    content = """
+    <div class="card">
+        <h1>Nuestra Identidad Institucional</h1>
+        <p>En el CBTis 204 trabajamos día con día bajo firmes valores éticos y profesionales para guiar a las nuevas generaciones hacia el éxito en el campo laboral y académico superior.</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="card" style="margin-bottom: 0;">
+            <h2>🎯 Misión</h2>
+            <p>Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales tecnológicos, con el fin de contribuir al desarrollo del país.</p>
+        </div>
+        <div class="card" style="margin-bottom: 0; border-left-color: #333;">
+            <h2>👁️ Visión</h2>
+            <p>Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
+        </div>
+    </div>
+    """
+    return render_template_string(BASE_TEMPLATE, content=content, page='nosotros')
+
+# --- RUTA 3: OFERTA EDUCATIVA (CARRERAS TÉCNICAS) ---
+@app.route('/oferta')
+def oferta():
+    content = """
+    <div class="card">
+        <h1>Oferta Educativa</h1>
+        <p>Te ofrecemos carreras técnicas profesionales con alta demanda en el sector productivo actual. Al egresar, obtendrás tu Certificado de Bachillerato y tu Título y Cédula Profesional Técnica.</p>
+        
+        <div class="grid-carreras">
+            <div class="carrera-card">
+                <h3>Técnico en Ofimática</h3>
+                <p>Aprende a gestionar sistemas de archivos digitales, diseñar documentos avanzados y administrar software de oficina.</p>
+                <span class="badge">Área Comercial y Servicios</span>
+            </div>
+            <div class="carrera-card">
+                <h3>Técnico en Contabilidad</h3>
+                <p>Domina el registro de operaciones financieras, cálculo de impuestos y auditoría administrativa empresarial.</p>
+                <span class="badge">Área Comercial</span>
+            </div>
+            <div class="carrera-card">
+                <h3>Técnico en Electrónica</h3>
+                <p>Especialízate en el diseño, mantenimiento y reparación de circuitos, sistemas eléctricos y automatización.</p>
+                <span class="badge">Área Industrial</span>
+            </div>
+        </div>
+    </div>
+    """
+    return render_template_string(BASE_TEMPLATE, content=content, page='oferta')
+
+# --- RUTA 4: ASISTENTE INTERACTIVO DE INSCRIPCIÓN (NUEVA LÓGICA DE BACKEND) ---
+@app.route('/inscripcion', methods=['GET', 'POST'])
+def inscripcion():
+    resultado_html = None
+    if request.method == 'POST':
+        nombre_alumno = request.form.get('nombre_alumno')
+        tipo_secundaria = request.form.get('tipo_secundaria')
+        carrera_interes = request.form.get('carrera_interes')
+        
+        # Lógica de Python para armar la respuesta adaptada al proceso real
+        documentos = [
+            "Acta de Nacimiento (Original y 2 copias)",
+            "Clave Única de Registro de Población (CURP) certificada",
+            "6 Fotografías tamaño infantil (Blanco y negro, papel mate)",
+            "Constancia de estudios o Certificado de Secundaria original"
+        ]
+        
+        # Agregar requisitos especiales usando condiciones válidas de programación backend
+        if tipo_secundaria == "privada":
+            documentos.append("Copia de la clave de incorporación de la secundaria de procedencia.")
+        else:
+            documentos.append("Copia de la boleta del último grado de la secundaria pública.")
+            
+        # Generar salida estructurada
+        resultado_html = f"""
+        <div class="resultado">
+            <h2 style="color: #276a1c;">¡Lugar Asegurado para el ciclo escolar!</h2>
+            <p>Estimado(a) <strong>{nombre_alumno}</strong>, en el CBTis 204 el ingreso es directo mediante tu proceso de registro. Tu espacio en la especialidad de <strong>{carrera_interes}</strong> está disponible.</p>
+            <p><strong>Por favor, acude al plantel con los siguientes documentos para formalizar tu inscripción:</strong></p>
+            <ul>
+        """
+        for doc in documentos:
+            resultado_html += f"<li>{doc}</li>"
+            
+        resultado_html += """
+            </ul>
+            <p style="margin-top: 15px; font-size: 14px; color: #555;">* El horario de recepción de documentos en las ventanillas de Control Escolar es de 8:00 AM a 2:00 PM.</p>
+        </div>
+        """
+
+    content = f"""
+    <div class="card">
+        <h1>Asistente de Inscripción Directa</h1>
+        <p>En nuestra institución tu educación está garantizada. Utiliza este asistente interactivo para registrar tus datos de procedencia y generar la lista oficial de requisitos para tu inscripción inmediata.</p>
+        <br>
+        <form action="/inscripcion" method="POST">
+            <div class="form-group">
+                <label>Nombre Completo del Aspirante:</label>
+                <input type="text" name="nombre_alumno" placeholder="Nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label>Secundaria de Procedencia:</label>
+                <select name="tipo_secundaria" required>
+                    <option value="publica">Secundaria Pública (General / Técnica / Telesecundaria)</option>
+                    <option value="privada">Secundaria Privada (Colegio Particular)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Especialidad Técnica de Interés:</label>
+                <select name="carrera_interes" required>
+                    <option value="Técnico en Ofimática">Técnico en Ofimática</option>
+                    <option value="Técnico en Contabilidad">Técnico en Contabilidad</option>
+                    <option value="Técnico en Electrónica">Técnico en Electrónica</option>
+                </select>
+            </div>
+            <button type="submit">Generar Requisitos de Inscripción</button>
+        </form>
+        
+        { resultado_html if resultado_html else '' }
+    </div>
+    """
+    return render_template_string(BASE_TEMPLATE, content=content, page='inscripcion')
 
 if __name__ == '__main__':
     app.run(debug=True)
