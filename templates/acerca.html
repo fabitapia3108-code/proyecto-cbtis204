@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto">
+<div class="max-w-5xl mx-auto animar-entrada">
     
     <!-- Carrusel de 5 Imágenes -->
     <div class="relative w-full h-96 overflow-hidden rounded-2xl shadow-2xl mb-12 border-4 border-black">
@@ -14,9 +14,8 @@
         </div>
     </div>
 
-   <!-- Texto Institucional con Imagen al lado -->
+    <!-- Texto Institucional con Imagen al lado -->
     <div class="bg-gray-800 text-white p-10 rounded-2xl shadow-xl mb-12 flex flex-col md:flex-row items-center gap-10">
-        <!-- Texto -->
         <div class="flex-1">
             <p class="text-lg leading-relaxed text-gray-200">
                 Somos una institución comprometida con la excelencia educativa y la formación técnica integral. 
@@ -25,7 +24,6 @@
                 Nuestra misión es formar ciudadanos competentes, críticos y responsables que contribuyan al progreso de nuestra sociedad.
             </p>
         </div>
-        <!-- Imagen al lado -->
         <div class="flex-none w-full md:w-1/3">
             <img src="{{ url_for('static', filename='inicio.jpg') }}" alt="Formación Integral" class="rounded-xl shadow-2xl border-4 border-red-900 object-cover h-64 w-full">
         </div>
@@ -33,12 +31,10 @@
 
     <!-- Cuadro de Misión y Visión -->
     <div class="grid md:grid-cols-2 gap-8">
-        <!-- Misión -->
         <div class="bg-red-900 text-white p-8 rounded-2xl shadow-xl border-l-8 border-black">
             <h2 class="text-3xl font-black mb-4 uppercase">Misión</h2>
             <p class="leading-relaxed">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales, tecnológicos con el fin de contribuir al desarrollo del país.</p>
         </div>
-        <!-- Visión -->
         <div class="bg-red-900 text-white p-8 rounded-2xl shadow-xl border-l-8 border-black">
             <h2 class="text-3xl font-black mb-4 uppercase">Visión</h2>
             <p class="leading-relaxed">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
@@ -46,7 +42,17 @@
     </div>
 </div>
 
-<!-- Script para el carrusel -->
+<!-- Animación y lógica del carrusel -->
+<style>
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animar-entrada {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+</style>
+
 <script>
     let index = 0;
     const carousel = document.getElementById('carousel');
