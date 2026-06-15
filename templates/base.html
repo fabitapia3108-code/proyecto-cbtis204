@@ -1,16 +1,25 @@
-<!-- templates/base.html -->
-<nav class="bg-black text-white p-4">
-    <div class="container mx-auto flex justify-between">
-        <a href="/" class="font-bold">Inicio</a>
-        <div class="space-x-4">
-            <a href="/acerca-de">Acerca de</a>
-            <a href="/oferta-educativa">Oferta Educativa</a>
-            <a href="/inscripcion">Inscripción</a>
-            <a href="/contacto">Contacto</a>
-            <a href="/aviso-privacidad">Aviso de Privacidad</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>CBTis 204</title>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-black text-white p-6">
+        <div class="container mx-auto flex justify-between">
+            <a href="/" class="font-bold">CBTis 204</a>
+            <div class="space-x-6">
+                <a href="/acerca-de" class="hover:text-red-500">Nosotros</a>
+                <a href="/oferta-educativa" class="hover:text-red-500">Carreras</a>
+                <a href="/inscripcion" class="hover:text-red-500">Inscripción</a>
+                <a href="/contacto" class="hover:text-red-500">Contacto</a>
+            </div>
         </div>
-    </div>
-</nav>
-<main>
-    {% block content %}{% endblock %}
-</main>
+    </nav>
+    
+    <!-- Aquí se insertará el contenido de las otras páginas -->
+    <main class="container mx-auto py-10">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
