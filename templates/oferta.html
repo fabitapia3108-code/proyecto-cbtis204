@@ -6,18 +6,48 @@
     <div class="text-center mb-16">
         <h1 class="text-5xl font-black uppercase text-red-900 mb-4">Oferta Educativa</h1>
         <div class="w-32 h-2 bg-red-600 mx-auto rounded-full mb-6"></div>
-        <p class="text-gray-600 text-lg">Conoce nuestras especialidades técnicas diseñadas para tu éxito profesional.</p>
     </div>
 
+    <!-- Cuadrícula de especialidades -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         {% set carreras = [
-            {'nombre': 'Ofimática', 'archivo': 'ofimatica.jpg', 'titulo': 'Técnico en Ofimática', 'desc': 'Domina el manejo de software de oficina, gestión de información digital y optimización de procesos administrativos.'},
-            {'nombre': 'Construcción', 'archivo': 'construccion.jpg', 'titulo': 'Técnico en Construcción', 'desc': 'Aprende sobre dibujo técnico, presupuestos de obra, lectura de planos y supervisión de proyectos de construcción.'},
-            {'nombre': 'Contabilidad', 'archivo': 'contabilidad.jpg', 'titulo': 'Técnico en Contabilidad', 'desc': 'Desarrolla habilidades en registro de operaciones financieras, elaboración de estados contables y cumplimiento fiscal.'},
-            {'nombre': 'Gestión en Innovación Turística', 'archivo': 'gestion e innovacion turistica.jpg', 'titulo': 'Técnico en G.I.T.', 'desc': 'Prepara proyectos turísticos innovadores, gestionando servicios de calidad y promoviendo el patrimonio cultural.'},
-            {'nombre': 'E-commerce', 'archivo': 'e-commerce.jpg', 'titulo': 'Técnico en E-commerce', 'desc': 'Especialízate en ventas digitales, marketing en línea, gestión de tiendas virtuales y comercio electrónico.'},
-            {'nombre': 'Vida Saludable', 'archivo': 'vida saludable.jpg', 'titulo': 'Técnico en Vida Saludable', 'desc': 'Promueve estilos de vida sanos, nutrición preventiva y bienestar comunitario a través de programas de salud.'}
+            {
+                'nombre': 'Ofimática', 
+                'archivo': 'ofimatica.jpg', 
+                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
+                'desc': 'La carrera de Técnico en Ofimática ofrece las competencias profesionales que permiten al estudiante realizar actividades dirigidas a gestionar hardware y software de la ofimática; gestionar información de manera local, remota, diseñar y gestionar bases de datos ofimáticas; y establecer comunicación utilizando herramientas digitales.'
+            },
+            {
+                'nombre': 'Construcción', 
+                'archivo': 'construccion.jpg', 
+                'titulo': 'PERFIL DE EGRESO, FISICO-MATEMATICO', 
+                'desc': 'Con los conocimientos y habilidades adquiridos en esta carrera, podrás desempeñar funciones en proyectos y diseños de casas habitación, edificaciones de centros comerciales y fábricas. Todo lo relacionado a lograr mayor eficiencia y aprovechamiento de los espacios en bienes inmuebles.'
+            },
+            {
+                'nombre': 'Contabilidad', 
+                'archivo': 'contabilidad.jpg', 
+                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
+                'desc': 'Al término de tus estudios en contabilidad, estarás capacitado para manejar sistemas contables y financieros relacionados con auditorías, costos, presupuestos y aspectos fiscales, siendo aplicables en los despachos contables, comercios, industria, etc.'
+            },
+            {
+                'nombre': 'Gestión e Innovación Turística', 
+                'archivo': 'gestion e innovacion turistica.jpg', 
+                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
+                'desc': 'Al concluir tu bachillerato en esta carrera, contarás con las competencias profesionales para colaborar en la gestión de proyectos, productos y servicios turísticos. Aplicarás tecnologías de vanguardia, tendencias de mercado y prácticas sostenibles para impulsar el desarrollo local y regional, con una actitud ética y dominio de una segunda lengua.'
+            },
+            {
+                'nombre': 'E-commerce', 
+                'archivo': 'e-commerce.jpg', 
+                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
+                'desc': 'Al concluir tu bachillerato en esta carrera, contarás con las competencias profesionales para operar plataformas digitales de venta de productos y servicios. Intervendrás en procesos de marketing digital, distribución y gestionarás la atención al cliente con altos estándares de calidad.'
+            },
+            {
+                'nombre': 'Salud Integral y Estilos de Vida Saludables', 
+                'archivo': 'vida saludable.jpg', 
+                'titulo': 'Bachillerato Químico-Biológico', 
+                'desc': 'Al concluir tus estudios en esta carrera egresas con el Bachillerato Químico-Biológico y podrás continuar tus estudios en Enfermería, Medicina o en cualquier área de la salud, brindando orientación sobre la prevención de enfermedades y promoción de vida saludable.'
+            }
         ] %}
 
         {% for carrera in carreras %}
@@ -25,7 +55,7 @@
             <img src="{{ url_for('static', filename=carrera.archivo) }}" alt="{{ carrera.nombre }}" class="w-full h-48 object-cover">
             <div class="p-6">
                 <h2 class="text-xl font-black text-black mb-1 uppercase">{{ carrera.nombre }}</h2>
-                <p class="text-red-900 font-bold text-sm italic mb-4">{{ carrera.titulo }}</p>
+                <p class="text-red-900 font-bold text-xs italic mb-4">{{ carrera.titulo }}</p>
                 <p class="text-gray-600 text-sm leading-relaxed">{{ carrera.desc }}</p>
             </div>
         </div>
