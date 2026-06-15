@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>CBTis 204</title>
+    <title>CBTis 204 | Tlalpujahua</title>
 </head>
 <body class="bg-gray-50">
-    <nav class="bg-black text-white p-6">
-        <div class="container mx-auto flex justify-between">
-            <a href="/" class="font-bold">CBTis 204</a>
-            <div class="space-x-6">
+    <nav class="bg-black text-white p-6 border-b-2 border-red-900">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-xl font-black italic text-red-600">CBTis 204</a>
+            <div class="space-x-6 text-xs font-bold uppercase tracking-widest">
                 <a href="/acerca-de" class="hover:text-red-500">Nosotros</a>
                 <a href="/oferta-educativa" class="hover:text-red-500">Carreras</a>
                 <a href="/inscripcion" class="hover:text-red-500">Inscripción</a>
                 <a href="/contacto" class="hover:text-red-500">Contacto</a>
+                <a href="/aviso-privacidad" class="hover:text-red-500">Aviso</a>
             </div>
         </div>
     </nav>
-    
-    <!-- Aquí se insertará el contenido de las otras páginas -->
-    <main class="container mx-auto py-10">
-        {% block content %}{% endblock %}
-    </main>
+    <main class="container mx-auto py-10">{% block content %}{% endblock %}</main>
 </body>
 </html>
