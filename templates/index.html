@@ -9,9 +9,12 @@
 <body class="bg-gray-50 text-gray-900 font-sans">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md p-6 border-b-2 border-red-900 text-white">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md p-4 border-b-2 border-red-900 text-white">
         <div class="container mx-auto flex justify-between items-center">
-            <span class="text-2xl font-black italic text-red-600">CBTis 204</span>
+            <div class="flex items-center space-x-3">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="h-12 w-12 object-contain">
+                <span class="text-2xl font-black italic text-red-600">CBTis 204</span>
+            </div>
             <div class="space-x-8 text-xs font-bold uppercase tracking-widest">
                 <a href="#inicio" class="hover:text-red-500">Inicio</a>
                 <a href="#institucion" class="hover:text-red-500">Institución</a>
