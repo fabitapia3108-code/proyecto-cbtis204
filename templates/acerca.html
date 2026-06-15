@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto animar-entrada">
+<!-- Contenedor con la animación aplicada -->
+<div class="max-w-5xl mx-auto animate-fade-in-up">
     
     <!-- Carrusel de 5 Imágenes -->
     <div class="relative w-full h-96 overflow-hidden rounded-2xl shadow-2xl mb-12 border-4 border-black">
@@ -42,17 +43,18 @@
     </div>
 </div>
 
-<!-- Animación y lógica del carrusel -->
+<!-- Estilos de Animación -->
 <style>
     @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
-    .animar-entrada {
-        animation: fadeInUp 1s ease-out forwards;
+    .animate-fade-in-up {
+        animation: fadeInUp 1.2s ease-out forwards;
     }
 </style>
 
+<!-- Script para el carrusel -->
 <script>
     let index = 0;
     const carousel = document.getElementById('carousel');
