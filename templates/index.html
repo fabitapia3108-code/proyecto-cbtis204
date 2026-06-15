@@ -1,116 +1,71 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBTis 204 - Tlalpujahua, Mich.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        institucional: {
-                            'rojo-oscuro': '#8B0000',
-                            'negro': '#000000',
-                            'gris-oscuro': '#333333',
-                            'gris-claro': '#E5E5E5',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(135deg, #000000 0%, #8B0000 100%); }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-    <!-- Header -->
-    <header class="bg-institucional-negro text-white p-6 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold">CBTis 204</h1>
-                <p class="text-sm text-gray-300">Tlalpujahua, Mich.</p>
-            </div>
-            <nav class="space-x-6">
-                <a href="#inicio" class="hover:text-institucional-rojo-oscuro transition">Inicio</a>
-                <a href="#oferta-educativa" class="hover:text-institucional-rojo-oscuro transition">Oferta Educativa</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Menú Fijo Elegante -->
+    <nav class="fixed w-full z-50 p-6 flex justify-center space-x-8 bg-black/80 backdrop-blur-md text-white border-b border-red-900">
+        <a href="#inicio" class="hover:text-red-500 transition">Inicio</a>
+        <a href="#mision" class="hover:text-red-500 transition">Institución</a>
+        <a href="#oferta" class="hover:text-red-500 transition">Oferta</a>
+        <a href="#inscripciones" class="hover:text-red-500 transition">Inscripciones</a>
+    </nav>
 
-    <!-- Sección Inicio -->
-    <section id="inicio" class="bg-white py-20 px-6 text-center">
-        <h2 class="text-4xl font-bold text-institucional-negro mb-4">Bienvenidos al CBTis 204</h2>
-        <p class="text-institucional-gris-oscuro max-w-2xl mx-auto">Excelencia académica en el corazón de Tlalpujahua. Formando técnicos profesionales con valores y visión de futuro.</p>
+    <!-- Sección Hero (Impactante) -->
+    <section id="inicio" class="hero-gradient h-screen flex flex-col items-center justify-center text-white text-center px-6">
+        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight">CBTis 204</h1>
+        <p class="text-xl md:text-2xl font-light text-gray-300">Excelencia técnica en el corazón de Tlalpujahua.</p>
     </section>
 
-    <!-- Oferta Educativa -->
-    <section id="oferta-educativa" class="py-20 px-6">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center text-institucional-negro">Nuestra Oferta Educativa</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 1. Ofimática -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='ofimatica.jpg') }}" alt="Ofimática" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">Ofimática</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Domina herramientas digitales para la eficiencia administrativa.</p>
-                    </div>
-                </div>
-
-                <!-- 2. Gestión Turística -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='gestion e innovacion turistica.jpg') }}" alt="Turismo" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">Gestión Turística</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Lidera el sector turístico innovando y gestionando experiencias.</p>
-                    </div>
-                </div>
-
-                <!-- 3. Construcción -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='CONSTRUCCION.jpg') }}" alt="Construcción" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">Construcción</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Fundamentos técnicos en edificación y diseño de espacios.</p>
-                    </div>
-                </div>
-
-                <!-- 4. Contabilidad -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='contabilidad.jpg') }}" alt="Contabilidad" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">Contabilidad</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Gestión financiera, fiscal y auditoría comercial integral.</p>
-                    </div>
-                </div>
-
-                <!-- 5. E-Commerce -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='e-commerce.jpg') }}" alt="E-Commerce" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">E-Commerce</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Operación y gestión de plataformas digitales de venta.</p>
-                    </div>
-                </div>
-
-                <!-- 6. Salud Integral -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border-b-4 border-institucional-rojo-oscuro">
-                    <img src="{{ url_for('static', filename='Vida saludable.jpg') }}" alt="Salud Integral" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-institucional-negro">Salud Integral</h3>
-                        <p class="text-sm text-institucional-gris-oscuro">Promoción de estilos de vida saludables y bienestar comunitario.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Misión y Visión (Diseño Moderno) -->
+    <section id="mision" class="py-24 container mx-auto px-6 grid md:grid-cols-2 gap-10">
+        <div class="p-10 border border-gray-200 hover:border-red-800 transition duration-500 shadow-xl rounded-2xl bg-white">
+            <h2 class="text-3xl font-bold mb-4 text-red-900">Misión</h2>
+            <p class="leading-relaxed">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales, con el fin de contribuir al desarrollo del país.</p>
+        </div>
+        <div class="p-10 border border-gray-200 hover:border-red-800 transition duration-500 shadow-xl rounded-2xl bg-white">
+            <h2 class="text-3xl font-bold mb-4 text-red-900">Visión</h2>
+            <p class="leading-relaxed">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-institucional-negro text-white py-8 text-center">
-        <p>&copy; 2026 CBTis 204. Todos los derechos reservados.</p>
-    </footer>
+    <!-- Oferta Educativa (Tarjetas Impresionantes) -->
+    <section id="oferta" class="py-24 bg-gray-900 text-white px-6">
+        <h2 class="text-4xl font-bold text-center mb-16">Nuestra Oferta Educativa</h2>
+        <div class="container mx-auto grid md:grid-cols-3 gap-8">
+            <!-- Bloque repetible de carrera -->
+            {% for nombre, data in [
+                ('Ofimática', 'ECONÓMICO-ADMINISTRATIVO', 'Gestión de hardware y software, bases de datos ofimáticas.'),
+                ('Gestión Turística', 'ECONÓMICO-ADMINISTRATIVO', 'Proyectos, tecnologías de vanguardia y prácticas sostenibles.'),
+                ('Construcción', 'FÍSICO-MATEMÁTICO', 'Diseño de edificación, eficiencia y aprovechamiento de espacios.'),
+                ('Contabilidad', 'ECONÓMICO-ADMINISTRATIVO', 'Sistemas contables, auditorías, costos y presupuestos.'),
+                ('E-Commerce', 'ECONÓMICO-ADMINISTRATIVO', 'Operación de plataformas digitales, marketing y logística.'),
+                ('Salud Integral', 'QUÍMICO-BIOLÓGICO', 'Promoción de salud, prevención de enfermedades y bienestar.')
+            ] %}
+            <div class="group bg-white text-gray-900 p-8 rounded-xl shadow-2xl border-b-4 border-red-800 hover:translate-y-[-10px] transition duration-300">
+                <h3 class="text-2xl font-bold mb-2">{{ nombre }}</h3>
+                <span class="block text-xs font-bold text-red-700 mb-4 uppercase tracking-widest">{{ data.1 }}</span>
+                <p class="text-gray-600">{{ data.2 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Inscripciones Elegantes -->
+    <section id="inscripciones" class="py-24 container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-12">Proceso de Inscripción 2026</h2>
+        <div class="max-w-4xl mx-auto bg-gray-100 p-12 rounded-3xl shadow-inner">
+            <p class="mb-6 text-lg">Requisitos: Constancia de secundaria, CURP, acta, fotos, comprobante de domicilio e INE del tutor. <br> <b>Costo: $500.00 pesos.</b></p>
+            <p class="text-red-900 font-bold text-xl">Inscripciones en Agosto 2026. ¡Curso propedéutico obligatorio!</p>
+        </div>
+    </section>
 
 </body>
 </html>
