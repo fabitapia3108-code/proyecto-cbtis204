@@ -1,12 +1,46 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1 class="text-4xl font-bold mb-10 text-center">Oferta Educativa</h1>
-<div class="grid md:grid-cols-3 gap-6">
-    {% for carrera in ['Ofimática', 'Gestión Turística', 'Construcción', 'Contabilidad', 'E-Commerce', 'Salud Integral'] %}
-    <div class="bg-white p-6 shadow rounded border-b-4 border-red-800">
-        <h3 class="text-xl font-bold text-red-700">{{ carrera }}</h3>
-        <p class="text-sm mt-2 text-gray-600">Descripción detallada de la especialidad técnica...</p>
+<div class="max-w-6xl mx-auto animar-entrada">
+    
+    <div class="text-center mb-16">
+        <h1 class="text-5xl font-black uppercase text-red-900 mb-4">Oferta Educativa</h1>
+        <div class="w-32 h-2 bg-red-600 mx-auto rounded-full mb-6"></div>
+        <p class="text-gray-600 text-lg">Conoce nuestras especialidades técnicas diseñadas para tu éxito profesional.</p>
     </div>
-    {% endfor %}
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        {% set carreras = [
+            {'nombre': 'Ofimática', 'archivo': 'ofimatica.jpg', 'titulo': 'Técnico en Ofimática', 'desc': 'Domina el manejo de software de oficina, gestión de información digital y optimización de procesos administrativos.'},
+            {'nombre': 'Construcción', 'archivo': 'construccion.jpg', 'titulo': 'Técnico en Construcción', 'desc': 'Aprende sobre dibujo técnico, presupuestos de obra, lectura de planos y supervisión de proyectos de construcción.'},
+            {'nombre': 'Contabilidad', 'archivo': 'contabilidad.jpg', 'titulo': 'Técnico en Contabilidad', 'desc': 'Desarrolla habilidades en registro de operaciones financieras, elaboración de estados contables y cumplimiento fiscal.'},
+            {'nombre': 'Gestión en Innovación Turística', 'archivo': 'gestion e innovacion turistica.jpg', 'titulo': 'Técnico en G.I.T.', 'desc': 'Prepara proyectos turísticos innovadores, gestionando servicios de calidad y promoviendo el patrimonio cultural.'},
+            {'nombre': 'E-commerce', 'archivo': 'e-commerce.jpg', 'titulo': 'Técnico en E-commerce', 'desc': 'Especialízate en ventas digitales, marketing en línea, gestión de tiendas virtuales y comercio electrónico.'},
+            {'nombre': 'Vida Saludable', 'archivo': 'vida saludable.jpg', 'titulo': 'Técnico en Vida Saludable', 'desc': 'Promueve estilos de vida sanos, nutrición preventiva y bienestar comunitario a través de programas de salud.'}
+        ] %}
+
+        {% for carrera in carreras %}
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-red-800">
+            <img src="{{ url_for('static', filename=carrera.archivo) }}" alt="{{ carrera.nombre }}" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h2 class="text-xl font-black text-black mb-1 uppercase">{{ carrera.nombre }}</h2>
+                <p class="text-red-900 font-bold text-sm italic mb-4">{{ carrera.titulo }}</p>
+                <p class="text-gray-600 text-sm leading-relaxed">{{ carrera.desc }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
 </div>
+
+<style>
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .animar-entrada {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+</style>
 {% endblock %}
