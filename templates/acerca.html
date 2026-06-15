@@ -14,22 +14,31 @@
         </div>
     </div>
 
-    <!-- Texto Institucional -->
-    <div class="bg-gray-800 text-white p-10 rounded-2xl shadow-xl mb-12">
-        <p class="text-lg leading-relaxed text-gray-200">
-            Somos una institución comprometida con la excelencia educativa y la formación técnica integral. 
-            En el CBTIS 204, nos dedicamos a preparar a los jóvenes para enfrentar los retos del mundo laboral y académico, 
-            combinando el rigor de la educación media superior con el desarrollo de habilidades tecnológicas de vanguardia. 
-            Nuestra misión es formar ciudadanos competentes, críticos y responsables que contribuyan al progreso de nuestra sociedad.
-        </p>
+   <!-- Texto Institucional con Imagen al lado -->
+    <div class="bg-gray-800 text-white p-10 rounded-2xl shadow-xl mb-12 flex flex-col md:flex-row items-center gap-10">
+        <!-- Texto -->
+        <div class="flex-1">
+            <p class="text-lg leading-relaxed text-gray-200">
+                Somos una institución comprometida con la excelencia educativa y la formación técnica integral. 
+                En el CBTIS 204, nos dedicamos a preparar a los jóvenes para enfrentar los retos del mundo laboral y académico, 
+                combinando el rigor de la educación media superior con el desarrollo de habilidades tecnológicas de vanguardia. 
+                Nuestra misión es formar ciudadanos competentes, críticos y responsables que contribuyan al progreso de nuestra sociedad.
+            </p>
+        </div>
+        <!-- Imagen al lado -->
+        <div class="flex-none w-full md:w-1/3">
+            <img src="{{ url_for('static', filename='vida saludable.jpg') }}" alt="Formación Integral" class="rounded-xl shadow-2xl border-4 border-red-900 object-cover h-64 w-full">
+        </div>
     </div>
 
     <!-- Cuadro de Misión y Visión -->
     <div class="grid md:grid-cols-2 gap-8">
+        <!-- Misión -->
         <div class="bg-red-900 text-white p-8 rounded-2xl shadow-xl border-l-8 border-black">
             <h2 class="text-3xl font-black mb-4 uppercase">Misión</h2>
             <p class="leading-relaxed">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales, tecnológicos con el fin de contribuir al desarrollo del país.</p>
         </div>
+        <!-- Visión -->
         <div class="bg-red-900 text-white p-8 rounded-2xl shadow-xl border-l-8 border-black">
             <h2 class="text-3xl font-black mb-4 uppercase">Visión</h2>
             <p class="leading-relaxed">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
@@ -37,7 +46,7 @@
     </div>
 </div>
 
-<!-- Script para el carrusel de 5 imágenes -->
+<!-- Script para el carrusel -->
 <script>
     let index = 0;
     const carousel = document.getElementById('carousel');
