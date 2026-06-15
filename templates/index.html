@@ -7,16 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .hero-section { background: linear-gradient(rgba(0,0,0,0.85), rgba(139,0,0,0.85)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920'); background-size: cover; background-position: center; }
-        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
+        .card-img { transition: transform 0.5s ease; }
+        .card-container:hover .card-img { transform: scale(1.1); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-black text-white p-6 shadow-xl border-b-2 border-red-900">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md p-6 shadow-xl border-b-2 border-red-900">
         <div class="container mx-auto flex justify-between items-center">
-            <span class="text-2xl font-black tracking-tighter italic text-red-600">CBTis 204</span>
-            <div class="space-x-8 text-xs font-bold uppercase tracking-widest">
+            <span class="text-2xl font-black italic text-red-600">CBTis 204</span>
+            <div class="space-x-8 text-xs font-bold uppercase tracking-widest text-white">
                 <a href="#inicio" class="hover:text-red-500">Inicio</a>
                 <a href="#institucion" class="hover:text-red-500">Misión y Visión</a>
                 <a href="#oferta" class="hover:text-red-500">Carreras</a>
@@ -26,57 +26,63 @@
         </div>
     </nav>
 
-    <!-- Inicio: Introducción -->
     <section id="inicio" class="hero-section h-screen flex items-center justify-center text-center px-4">
         <div class="max-w-4xl">
-            <h1 class="text-7xl font-black text-white mb-8 uppercase italic tracking-tighter">Bienvenido al CBTis 204</h1>
-            <p class="text-2xl text-gray-200 font-light border-t border-b border-red-700 py-6">Formando líderes técnicos con excelencia académica y compromiso social en Tlalpujahua, Michoacán.</p>
+            <h1 class="text-7xl font-black text-white mb-8 uppercase italic tracking-tighter">CBTis 204</h1>
+            <p class="text-2xl text-gray-200 font-light border-t border-b border-red-700 py-6">Formando líderes técnicos en Tlalpujahua, Michoacán.</p>
         </div>
     </section>
 
-    <!-- Institución: Misión y Visión -->
     <section id="institucion" class="py-24 bg-white">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16">
-            <div class="bg-gray-50 p-12 rounded-lg border-t-8 border-red-900 shadow-2xl">
-                <h2 class="text-4xl font-bold mb-6 text-black">Misión Institucional</h2>
-                <p class="text-gray-700 text-lg leading-relaxed">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales, con el fin de contribuir al desarrollo del país.</p>
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
+            <div class="p-10 border-l-8 border-red-900 shadow-xl bg-gray-50">
+                <h2 class="text-3xl font-bold mb-4">Misión</h2>
+                <p class="text-gray-700">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales.</p>
             </div>
-            <div class="bg-gray-50 p-12 rounded-lg border-t-8 border-red-900 shadow-2xl">
-                <h2 class="text-4xl font-bold mb-6 text-black">Visión Institucional</h2>
-                <p class="text-gray-700 text-lg leading-relaxed">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
+            <div class="p-10 border-l-8 border-red-900 shadow-xl bg-gray-50">
+                <h2 class="text-3xl font-bold mb-4">Visión</h2>
+                <p class="text-gray-700">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
             </div>
         </div>
     </section>
 
-    <!-- Oferta Educativa: Detallada -->
     <section id="oferta" class="py-24 bg-gray-900 text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-20 uppercase">Oferta Educativa Técnica</h2>
-            <div class="grid md:grid-cols-2 gap-10">
-                <!-- Tarjetas de Carreras -->
-                <div class="bg-gray-800 p-10 rounded-xl border-l-4 border-red-600">
-                    <h3 class="text-3xl font-bold text-red-500">Ofimática</h3>
-                    <p class="text-sm uppercase text-gray-400 mt-2 mb-4 italic">Bachillerato: ECONÓMICO-ADMINISTRATIVO</p>
-                    <p class="text-gray-300">Ofrece las competencias para gestionar hardware y software, gestionar información de manera local y remota, y diseñar bases de datos ofimáticas usando herramientas digitales de vanguardia.</p>
+            <h2 class="text-5xl font-black text-center mb-16 uppercase">Nuestras 6 Especialidades</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                {% set carreras = [
+                    ('Ofimática', 'ofimatica.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Gestión de hardware, software y bases de datos.'),
+                    ('Gestión Turística', 'gestion e innovacion turistica.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Proyectos de vanguardia y prácticas sostenibles.'),
+                    ('Construcción', 'CONSTRUCCION.jpg', 'FÍSICO-MATEMÁTICO', 'Diseño de edificación, eficiencia y espacios.'),
+                    ('Contabilidad', 'contabilidad.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Sistemas contables, auditorías y presupuestos.'),
+                    ('E-Commerce', 'e-commerce.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Plataformas digitales, marketing y logística.'),
+                    ('Salud Integral', 'Vida saludable.jpg', 'QUÍMICO-BIOLÓGICO', 'Promoción de la salud y bienestar comunitario.')
+                ] %}
+
+                {% for titulo, img, bach, desc in carreras %}
+                <div class="card-container bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
+                    <div class="overflow-hidden h-48">
+                        <img src="{{ url_for('static', filename=img) }}" class="card-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-red-500">{{ titulo }}</h3>
+                        <p class="text-[10px] font-bold uppercase text-gray-400 mt-1 mb-3">{{ bach }}</p>
+                        <p class="text-gray-300 text-sm">{{ desc }}</p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-10 rounded-xl border-l-4 border-red-600">
-                    <h3 class="text-3xl font-bold text-red-500">Gestión Turística</h3>
-                    <p class="text-sm uppercase text-gray-400 mt-2 mb-4 italic">Bachillerato: ECONÓMICO-ADMINISTRATIVO</p>
-                    <p class="text-gray-300">Formación para colaborar en la gestión de proyectos y productos turísticos, aplicando tecnologías de mercado, prácticas sostenibles y dominio de una segunda lengua.</p>
-                </div>
-                <!-- (Puedes añadir bloques similares para Construcción, Contabilidad, E-Commerce y Salud Integral aquí) -->
+                {% endfor %}
             </div>
         </div>
     </section>
 
-    <!-- Inscripciones: Requisitos completos -->
-    <section id="inscripciones" class="py-24 bg-gray-100">
-        <div class="container mx-auto px-6 max-w-5xl bg-white p-16 shadow-2xl rounded-2xl">
-            <h2 class="text-4xl font-black mb-12 uppercase text-red-900 text-center">Proceso de Inscripción 2026</h2>
-            <div class="grid md:grid-cols-2 gap-12 text-gray-800">
+    <section id="inscripciones" class="py-24 container mx-auto px-6">
+        <h2 class="text-4xl font-black text-center mb-12 uppercase">Inscripciones 2026</h2>
+        <div class="max-w-4xl mx-auto bg-white p-12 shadow-2xl rounded-2xl border border-gray-100">
+            <div class="grid md:grid-cols-2 gap-12">
                 <div>
-                    <h4 class="text-xl font-bold mb-4 uppercase text-black">Documentación Requerida</h4>
-                    <ul class="list-decimal space-y-3 ml-6">
+                    <h4 class="font-bold mb-4 uppercase">Documentos Requeridos</h4>
+                    <ul class="list-disc ml-5 text-gray-600 space-y-2">
                         <li>Constancia de secundaria original.</li>
                         <li>Copia de CURP y acta de nacimiento.</li>
                         <li>2 fotografías tamaño infantil.</li>
@@ -85,25 +91,17 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xl font-bold mb-4 uppercase text-black">Información Administrativa</h4>
-                    <p class="mb-4"><strong>Costo:</strong> $500.00 pesos.</p>
-                    <p class="mb-4"><strong>Fechas clave:</strong></p>
-                    <ul class="list-disc ml-6 space-y-2">
-                        <li>Evaluación diagnóstica (EDIEMS): Junio 2026.</li>
-                        <li>Inscripciones: Agosto 2026.</li>
-                        <li>Curso Propedéutico: Obligatorio en Agosto.</li>
-                    </ul>
+                    <h4 class="font-bold mb-4 uppercase">Detalles</h4>
+                    <p class="text-3xl font-black text-red-900 mb-2">$500.00 pesos</p>
+                    <p class="text-sm text-gray-500">Inscripciones en agosto. Curso propedéutico obligatorio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <footer id="contacto" class="py-16 bg-black text-white text-center">
-        <h3 class="text-2xl font-bold mb-6">Contacto Institucional</h3>
-        <p class="text-gray-400 text-lg">Km 39+000 Carretera Maravatío-Tlalpujahua, Michoacán.</p>
-        <p class="text-red-500 text-xl font-bold mt-2">cbtis204.dir@dgeti.sems.gob.mx</p>
-        <p class="mt-8 text-sm uppercase text-gray-600">© 2026 CBTis 204 - Todos los derechos reservados.</p>
+    <footer id="contacto" class="bg-black text-gray-500 py-16 text-center text-sm uppercase tracking-widest">
+        <p>CBTis 204 | Tlalpujahua, Michoacán</p>
+        <p class="text-red-500 font-bold mt-2">cbtis204.dir@dgeti.sems.gob.mx</p>
     </footer>
 
 </body>
