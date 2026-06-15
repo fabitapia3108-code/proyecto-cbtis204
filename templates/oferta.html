@@ -1,1 +1,12 @@
-
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-4xl font-bold mb-10 text-center">Oferta Educativa</h1>
+<div class="grid md:grid-cols-3 gap-6">
+    {% for carrera in ['Ofimática', 'Gestión Turística', 'Construcción', 'Contabilidad', 'E-Commerce', 'Salud Integral'] %}
+    <div class="bg-white p-6 shadow rounded border-b-4 border-red-800">
+        <h3 class="text-xl font-bold text-red-700">{{ carrera }}</h3>
+        <p class="text-sm mt-2 text-gray-600">Descripción detallada de la especialidad técnica...</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
