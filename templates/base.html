@@ -1,114 +1,16 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBTis 204 | Tlalpujahua, Michoacán</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md p-4 border-b-2 border-red-900 text-white">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo cbtis.jpg" class="h-12 w-12 object-contain">
-                <span class="text-2xl font-black italic text-red-600">CBTis 204</span>
-            </div>
-            <div class="space-x-8 text-xs font-bold uppercase tracking-widest">
-                <a href="#inicio" class="hover:text-red-500">Inicio</a>
-                <a href="#institucion" class="hover:text-red-500">Institución</a>
-                <a href="#oferta" class="hover:text-red-500">Carreras</a>
-                <a href="#inscripciones" class="hover:text-red-500">Inscripciones</a>
-                <a href="#contacto" class="hover:text-red-500">Contacto</a>
-            </div>
+<!-- templates/base.html -->
+<nav class="bg-black text-white p-4">
+    <div class="container mx-auto flex justify-between">
+        <a href="/" class="font-bold">Inicio</a>
+        <div class="space-x-4">
+            <a href="/acerca-de">Acerca de</a>
+            <a href="/oferta-educativa">Oferta Educativa</a>
+            <a href="/inscripcion">Inscripción</a>
+            <a href="/contacto">Contacto</a>
+            <a href="/aviso-privacidad">Aviso de Privacidad</a>
         </div>
-    </nav>
-
-    <!-- Inicio -->
-    <section id="inicio" class="h-screen flex items-center justify-center text-center px-4 bg-black text-white">
-        <div>
-            <h1 class="text-7xl font-black uppercase italic tracking-tighter mb-4">CBTis 204</h1>
-            <p class="text-2xl font-light border-t border-b border-red-700 py-6">Formando líderes técnicos en Tlalpujahua, Michoacán.</p>
-        </div>
-    </section>
-
-    <!-- Misión y Visión -->
-    <section id="institucion" class="py-24 container mx-auto px-6 grid md:grid-cols-2 gap-12">
-        <div class="p-10 border-l-8 border-red-900 shadow-xl bg-white">
-            <h2 class="text-3xl font-bold mb-4">Misión</h2>
-            <p class="text-gray-700">Formar personas con conocimientos tecnológicos en las áreas industrial, comercial y de servicios a través de la preparación de bachilleres y profesionales, con el fin de contribuir al desarrollo del país.</p>
-        </div>
-        <div class="p-10 border-l-8 border-red-900 shadow-xl bg-white">
-            <h2 class="text-3xl font-bold mb-4">Visión</h2>
-            <p class="text-gray-700">Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanistas.</p>
-        </div>
-    </section>
-
-    <!-- Oferta Educativa -->
-    <section id="oferta" class="py-24 bg-gray-900 text-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-16 uppercase">Especialidades</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% set carreras = [
-                    ('Ofimática', 'ofimatica.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'La carrera de Técnico en Ofimática ofrece las competencias profesionales que permiten al estudiante realizar actividades dirigidas a gestionar hardware y software de la ofimática; gestionar información de manera local, remota, diseñar y gestionar bases de datos ofimáticas; y establecer comunicación utilizando herramientas digitales.'),
-                    ('Gestión Turística', 'gestion e innovacion turistica.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Al concluir tu bachillerato en esta carrera, contarás con las competencias profesionales para colaborar en la gestión de proyectos, productos turísticos. Aplicarás tecnologías de vanguardia, tendencias de mercado y prácticas sostenibles para impulsar el desarrollo local y regional, con una actitud ética y dominio de una segunda lengua.'),
-                    ('Construcción', 'CONSTRUCCION.jpg', 'FÍSICO-MATEMÁTICO', 'Con los conocimientos y habilidades adquiridos en esta carrera, podrás desempeñar funciones en proyectos y diseños de casas habitación, edificaciones de centros comerciales y fábricas. Todo relacionado a lograr una mayor eficiencia y aprovechamiento de los espacios en bienes inmuebles.'),
-                    ('Contabilidad', 'contabilidad.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Al término de tus estudios en contabilidad, estarás capacitado para manejar sistemas contables y financieros relacionados con auditorías, costos, presupuestos y aspectos fiscales, siendo aplicables en los despachos contables, comercios, industria, etc.'),
-                    ('E-Commerce', 'e-commerce.jpg', 'ECONÓMICO-ADMINISTRATIVO', 'Contarás con las competencias profesionales para operar plataformas digitales de venta y servicios, asegurando procesos eficientes y seguros. Aplicarás estrategias de marketing digital, intervendrás en procesos de logística y distribución, y gestionarás la atención al cliente con altos estándares de calidad.'),
-                    ('Salud Integral', 'Vida saludable.jpg', 'QUÍMICO-BIOLÓGICO', 'Podrás desempeñar funciones en la promoción de la salud y el bienestar en diversos ámbitos, brindar orientación sobre la prevención de enfermedades, promover programas de vida saludable en instituciones educativas, empresas, centros comunitarios y organizaciones dedicadas al cuidado de la salud.')
-                ] %}
-                {% for titulo, img, bach, desc in especialidades %}
-                <div class="bg-gray-800 p-6 rounded-lg shadow-2xl border-b-4 border-red-800">
-                    <img src="{{ url_for('static', filename=img) }}" class="w-full h-40 object-cover mb-4 rounded">
-                    <h3 class="text-xl font-bold text-red-500">{{ titulo }}</h3>
-                    <p class="text-[10px] font-bold uppercase text-gray-400 mt-1 mb-3">{{ bach }}</p>
-                    <p class="text-gray-300 text-sm leading-relaxed">{{ desc }}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Inscripciones -->
-    <section id="inscripciones" class="py-24 container mx-auto px-6">
-        <h2 class="text-4xl font-black text-center mb-12 uppercase">Inscripciones 2026</h2>
-        <div class="max-w-4xl mx-auto bg-white p-12 shadow-2xl rounded-2xl border border-gray-100">
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h4 class="font-bold mb-4 uppercase">Documentos Requeridos</h4>
-                    <ul class="list-disc ml-5 text-gray-600 space-y-2">
-                        <li>Constancia de secundaria original.</li>
-                        <li>Copia de CURP y acta de nacimiento.</li>
-                        <li>2 fotografías tamaño infantil.</li>
-                        <li>Comprobante de domicilio reciente e INE del padre o tutor.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 uppercase">Detalles</h4>
-                    <p class="text-3xl font-black text-red-900 mb-2">$500.00 pesos.</p>
-                    <p class="text-sm text-gray-500">Inscripciones en agosto 2026. Curso propedéutico obligatorio en agosto.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contacto -->
-    <footer id="contacto" class="py-16 bg-black text-white px-6">
-        <div class="container mx-auto grid md:grid-cols-2 gap-8">
-            <div>
-                <h3 class="text-2xl font-bold mb-4">Información de Contacto</h3>
-                <p class="mb-2">📍 Km 39 carr. Maravatio-Tlalpujahua, Tlalpujahua de Rayón, Mexico, 61060</p>
-                <p class="mb-2">📞 711 158 0213</p>
-                <p class="mb-2">✉️ cbtis204.subdir@dgeti.sems.gob.mx</p>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold mb-4">Enlaces</h3>
-                <p class="mb-2">🌐 <a href="http://cbtis204.edu.mx" class="text-red-500 hover:underline">cbtis204.edu.mx</a></p>
-                <p>💬 CBTIS 204</p>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+    </div>
+</nav>
+<main>
+    {% block content %}{% endblock %}
+</main>
