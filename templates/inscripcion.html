@@ -1,11 +1,57 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<section class="bg-white p-12 shadow rounded">
-    <h1 class="text-4xl font-bold mb-6">Proceso de Inscripción 2026</h1>
-    <ul class="list-disc ml-5 space-y-2">
-        <li>Constancia de secundaria original.</li>
-        <li>CURP, acta, fotos, comprobante de domicilio e INE del tutor.</li>
-        <li>Costo: $500.00 pesos.</li>
-    </ul>
-</section>
+<div class="max-w-4xl mx-auto animar-entrada">
+    
+    <!-- Encabezado -->
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-black uppercase text-red-900 mb-4">Proceso de Inscripción</h1>
+        <div class="w-32 h-2 bg-red-600 mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Bloque de Entrega de Fichas -->
+    <div class="bg-gray-800 text-white p-8 rounded-2xl shadow-xl mb-8 border-l-8 border-red-700">
+        <h2 class="text-3xl font-bold mb-4 uppercase">Entrega de Fichas</h2>
+        <p class="text-lg text-gray-300">
+            A partir del 16 de febrero de 2026 en la oficina de control escolar del CBTIS 204.
+        </p>
+        <p class="text-xl font-semibold mt-2 text-red-400">Horario: 8:00 a 13:00 horas</p>
+    </div>
+
+    <!-- Requisitos -->
+    <div class="bg-white p-8 rounded-2xl shadow-xl mb-8 border-t-4 border-black">
+        <h2 class="text-2xl font-black mb-6 uppercase">Requisitos para Ficha</h2>
+        <ul class="space-y-4 text-gray-700">
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Constancia de secundaria ORIGINAL</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Copia de la CURP</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> 2 fotografías tamaño infantil</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Comprobante de domicilio reciente</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Copia del INE del Padre o Tutor</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Costo $500.00 pesos</li>
+            <li class="flex items-center gap-3"><span class="text-red-700 text-xl">•</span> Número de teléfono celular con acceso a WhatsApp</li>
+        </ul>
+    </div>
+
+    <!-- Información Importante -->
+    <div class="bg-red-900 text-white p-8 rounded-2xl shadow-xl">
+        <h3 class="text-xl font-bold mb-4">Fechas Clave:</h3>
+        <p class="mb-2">La Evaluación Diagnóstica de Ingreso a la Educación Media Superior (EDIEMS) se realizará en el mes de junio de 2026.</p>
+        <p class="font-bold text-lg">INSCRIPCIONES EN EL MES DE AGOSTO DE 2026.</p>
+        <p class="mt-2 italic">CURSO PROPEDÉUTICO E INDUCCIÓN EN EL MES DE AGOSTO. ¡LA ASISTENCIA ES OBLIGATORIA!</p>
+    </div>
+
+    <div class="mt-10 text-center">
+        <h2 class="text-2xl font-black uppercase">¡Construye tu futuro hoy y únete a la gran familia CBTis 204!</h2>
+    </div>
+</div>
+
+<style>
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .animar-entrada {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+</style>
 {% endblock %}
