@@ -1,61 +1,30 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="max-w-6xl mx-auto animar-entrada p-6">
-    
-    <!-- Encabezado -->
     <div class="text-center mb-16">
         <h1 class="text-5xl font-black uppercase text-red-900 mb-4">Contacto</h1>
         <div class="w-32 h-2 bg-red-600 mx-auto rounded-full"></div>
     </div>
 
     <div class="grid md:grid-cols-2 gap-12">
-        
-        <!-- Columna 1: Información y Mapa -->
-        <div class="space-y-8">
-            <div class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-red-900">
-                <h2 class="text-2xl font-black mb-8 uppercase">Información Directa</h2>
-                
-                <div class="space-y-6">
-                    <div class="flex items-center gap-6">
-                        <div class="bg-red-100 p-4 rounded-full text-red-900">📞</div>
-                        <p class="text-xl font-bold text-gray-700">711 158 0213</p>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="bg-red-100 p-4 rounded-full text-red-900">✉️</div>
-                        <a href="mailto:cbtis204.subdir@dgeti.sems.gob.mx" class="text-lg text-red-800 font-semibold hover:underline">cbtis204.subdir@dgeti.sems.gob.mx</a>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <div class="bg-red-100 p-4 rounded-full text-red-900">🌐</div>
-                        <a href="https://www.facebook.com/Cbtis204?mibextid=wwXIfr" target="_blank" class="text-xl text-red-800 font-semibold hover:underline">CBTIS No. 204</a>
-                    </div>
-                </div>
+        <div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-red-900 mb-8">
+                <h2 class="text-2xl font-black mb-6">Información Directa</h2>
+                <p class="font-bold">📞 711 158 0213</p>
+                <p class="text-sm font-bold mt-4">📍 Km 39, Carr. Maravatio-Tlalpujahua, Tlalpujahua de Rayón, México, C.P. 61060</p>
             </div>
-
-            <!-- Mapa Integrado -->
-            <div class="h-64 rounded-3xl overflow-hidden shadow-xl border-4 border-white">
-                <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.111956557876!2d-100.228123!3d19.790938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d326f592476569%3A0x6a0d4c9d5351e289!2sCBTis+204!5e0!3m2!1ses!2smx!4v1684345233215!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+            <div class="h-64 rounded-3xl overflow-hidden shadow-xl">
+                <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.111956557876!2d-100.228123!3d19.790938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d326f592476569%3A0x6a0d4c9d5351e289!2sCBTis+204!5e0!3m2!1ses!2smx!4v1684345233215!5m2!1ses!2smx"></iframe>
             </div>
         </div>
-
-        <!-- Columna 2: Formulario de Mensaje -->
         <div class="bg-black text-white p-8 rounded-3xl shadow-2xl">
             <h2 class="text-2xl font-black mb-6 uppercase">Envíanos un mensaje</h2>
             <form class="space-y-4">
-                <input type="text" placeholder="Nombre completo" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-red-600 outline-none">
-                <input type="email" placeholder="Correo electrónico" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-red-600 outline-none">
-                <textarea placeholder="¿En qué podemos ayudarte?" rows="5" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-red-600 outline-none"></textarea>
-                <button type="button" class="w-full py-4 bg-red-700 hover:bg-red-800 font-black rounded-xl uppercase transition transform hover:scale-[1.02]">Enviar mensaje</button>
+                <input type="text" placeholder="Nombre" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-700">
+                <textarea placeholder="¿En qué te ayudamos?" rows="5" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-700"></textarea>
+                <button class="w-full py-4 bg-red-700 font-black rounded-xl uppercase">Enviar</button>
             </form>
         </div>
     </div>
 </div>
-
-<style>
-    @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(30px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    .animar-entrada { animation: fadeInUp 1s ease-out forwards; }
-</style>
 {% endblock %}
