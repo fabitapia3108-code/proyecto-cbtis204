@@ -8,69 +8,51 @@
         <div class="w-32 h-2 bg-red-600 mx-auto rounded-full mb-6"></div>
     </div>
 
-    <!-- Cuadrícula de especialidades -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         {% set carreras = [
-            {
-                'nombre': 'Ofimática', 
-                'archivo': 'ofimatica.jpg', 
-                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
-                'desc': 'La carrera de Técnico en Ofimática ofrece las competencias profesionales que permiten al estudiante realizar actividades dirigidas a gestionar hardware y software de la ofimática; gestionar información de manera local, remota, diseñar y gestionar bases de datos ofimáticas; y establecer comunicación utilizando herramientas digitales.'
-            },
-            {
-                'nombre': 'Construcción', 
-                'archivo': 'construccion.jpg', 
-                'titulo': 'PERFIL DE EGRESO, FISICO-MATEMATICO', 
-                'desc': 'Con los conocimientos y habilidades adquiridos en esta carrera, podrás desempeñar funciones en proyectos y diseños de casas habitación, edificaciones de centros comerciales y fábricas. Todo lo relacionado a lograr mayor eficiencia y aprovechamiento de los espacios en bienes inmuebles.'
-            },
-            {
-                'nombre': 'Contabilidad', 
-                'archivo': 'contabilidad.jpg', 
-                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
-                'desc': 'Al término de tus estudios en contabilidad, estarás capacitado para manejar sistemas contables y financieros relacionados con auditorías, costos, presupuestos y aspectos fiscales, siendo aplicables en los despachos contables, comercios, industria, etc.'
-            },
-            {
-                'nombre': 'Gestión e Innovación Turística', 
-                'archivo': 'gestion e innovacion turistica.jpg', 
-                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
-                'desc': 'Al concluir tu bachillerato en esta carrera, contarás con las competencias profesionales para colaborar en la gestión de proyectos, productos y servicios turísticos. Aplicarás tecnologías de vanguardia, tendencias de mercado y prácticas sostenibles para impulsar el desarrollo local y regional, con una actitud ética y dominio de una segunda lengua.'
-            },
-            {
-                'nombre': 'E-commerce', 
-                'archivo': 'e-commerce.jpg', 
-                'titulo': 'PERFIL DE EGRESO, ECONOMICO-ADMINISTRATIVO', 
-                'desc': 'Al concluir tu bachillerato en esta carrera, contarás con las competencias profesionales para operar plataformas digitales de venta de productos y servicios. Intervendrás en procesos de marketing digital, distribución y gestionarás la atención al cliente con altos estándares de calidad.'
-            },
-            {
-                'nombre': 'Salud Integral y Estilos de Vida Saludables', 
-                'archivo': 'vida saludable.jpg', 
-                'titulo': 'PERFIL DE EGRESO, QUIMICO-BIOLOGICO', 
-                'desc': 'Al concluir tus estudios en esta carrera egresas con el Bachillerato Químico-Biológico y podrás continuar tus estudios en Enfermería, Medicina o en cualquier área de la salud, brindando orientación sobre la prevención de enfermedades y promoción de vida saludable.'
-            }
+            {'nombre': 'Ofimática', 'archivo': 'ofimatica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'La carrera de Técnico en Ofimática ofrece las competencias para gestionar hardware, software, bases de datos y establecer comunicación mediante herramientas digitales.'},
+            {'nombre': 'Construcción', 'archivo': 'construccion.jpg', 'titulo': 'PERFIL FISICO-MATEMATICO', 'desc': 'Desempeña funciones en proyectos y diseños de casas habitación, edificaciones comerciales y fábricas, optimizando espacios y eficiencia estructural.'},
+            {'nombre': 'Contabilidad', 'archivo': 'contabilidad.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Capacitado para manejar sistemas contables y financieros, auditorías, costos, presupuestos y cumplimiento fiscal en diversos sectores.'},
+            {'nombre': 'Gestión Turística', 'archivo': 'gestion e innovacion turistica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Competencias para gestionar proyectos y servicios turísticos utilizando tecnologías de vanguardia y prácticas sostenibles con sentido ético.'},
+            {'nombre': 'E-commerce', 'archivo': 'e-commerce.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Especialízate en operar plataformas digitales de ventas, marketing en línea, logística de distribución y atención al cliente de alta calidad.'},
+            {'nombre': 'Vida Saludable', 'archivo': 'vida saludable.jpg', 'titulo': 'BACHILLERATO QUÍMICO-BIOLÓGICO', 'desc': 'Egresa con base científica para continuar estudios en Medicina, Enfermería o salud, promoviendo la prevención y el bienestar comunitario.'}
         ] %}
 
         {% for carrera in carreras %}
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-red-800">
-            <img src="{{ url_for('static', filename=carrera.archivo) }}" alt="{{ carrera.nombre }}" class="w-full h-48 object-cover">
-            <div class="p-6">
-                <h2 class="text-xl font-black text-black mb-1 uppercase">{{ carrera.nombre }}</h2>
-                <p class="text-red-900 font-bold text-xs italic mb-4">{{ carrera.titulo }}</p>
-                <p class="text-gray-600 text-sm leading-relaxed">{{ carrera.desc }}</p>
+        <div class="flip-card w-full h-96 cursor-pointer">
+            <div class="flip-card-inner w-full h-full transition-transform duration-700 relative preserve-3d">
+                
+                <div class="flip-card-front absolute w-full h-full rounded-2xl shadow-xl overflow-hidden backface-hidden bg-white border-b-4 border-red-800">
+                    <img src="{{ url_for('static', filename=carrera.archivo) }}" alt="{{ carrera.nombre }}" class="w-full h-64 object-cover">
+                    <div class="p-6 text-center">
+                        <h2 class="text-lg font-black text-black uppercase">{{ carrera.nombre }}</h2>
+                        <p class="text-red-900 font-bold text-[10px] mt-2 tracking-widest">{{ carrera.titulo }}</p>
+                    </div>
+                </div>
+
+                <div class="flip-card-back absolute w-full h-full rounded-2xl shadow-xl bg-red-900 text-white p-8 flex flex-col justify-center items-center backface-hidden rotate-y-180 border-b-4 border-black">
+                    <h3 class="text-xl font-black mb-4 uppercase">{{ carrera.nombre }}</h3>
+                    <p class="text-sm leading-relaxed text-center text-red-100">{{ carrera.desc }}</p>
+                    <div class="mt-6 w-12 h-1 bg-white rounded-full"></div>
+                </div>
             </div>
         </div>
         {% endfor %}
-
     </div>
 </div>
 
 <style>
+    .flip-card { perspective: 1000px; }
+    .flip-card-inner { transform-style: preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    
     @keyframes fadeInUp {
         0% { opacity: 0; transform: translateY(30px); }
         100% { opacity: 1; transform: translateY(0); }
     }
-    .animar-entrada {
-        animation: fadeInUp 1s ease-out forwards;
-    }
+    .animar-entrada { animation: fadeInUp 1s ease-out forwards; }
 </style>
 {% endblock %}
