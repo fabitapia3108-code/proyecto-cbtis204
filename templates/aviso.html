@@ -3,31 +3,31 @@
 {% block content %}
 <div class="max-w-4xl mx-auto animar-entrada p-6">
     
-    <!-- Encabezado -->
+   
     <div class="text-center mb-12">
         <h1 class="text-5xl font-black uppercase text-red-900 mb-4">Aviso de Privacidad</h1>
         <div class="w-32 h-2 bg-red-600 mx-auto rounded-full mb-6"></div>
         <p class="text-gray-600 text-lg">Consulta los términos y el manejo seguro de tus datos institucionales.</p>
     </div>
 
-    <!-- Contenedor del PDF -->
+    
     <div class="bg-white p-6 rounded-3xl shadow-2xl border-t-8 border-red-800 flex flex-col items-center">
         
-        <!-- Vista previa del PDF (Interactiva) -->
+        
         <div class="w-full h-[600px] rounded-xl overflow-hidden border border-gray-300 shadow-inner mb-6">
             <iframe src="{{ url_for('static', filename='avisoprivacidad.pdf') }}" class="w-full h-full" frameborder="0">
                 <p class="text-center p-4 text-gray-600">
-                    Tu navegador no soporta la vista previa de PDFs. Puedes descargarlo usando el botón de abajo.
+                    
                 </p>
             </iframe>
         </div>
 
-        <!-- Botón de Descarga Directa -->
+        
         <a href="{{ url_for('static', filename='avisoprivacidad.pdf') }}" download class="inline-flex items-center gap-3 bg-red-900 hover:bg-black text-white font-bold py-3 p-8 rounded-xl shadow-lg transition-colors duration-300 uppercase tracking-wider text-sm">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v1M12 4v12m0 0l-4-4m4 4l4-4"></path>
             </svg>
-            Descargar Aviso de Privacidad (PDF)
+            
         </a>
 
     </div>
