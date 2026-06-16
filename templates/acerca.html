@@ -3,7 +3,6 @@
 {% block content %}
 <div class="max-w-5xl mx-auto animate-fade-in-up">
     
-    <!-- Carrusel Mejorado: Con sombra más suave y esquinas redondeadas -->
     <div class="relative w-full h-96 overflow-hidden rounded-3xl shadow-2xl mb-12 border border-white/20">
         <div id="carousel" class="flex transition-transform duration-1000 ease-in-out h-full" style="width: 500%;">
             <img src="{{ url_for('static', filename='concursorobot.jpg') }}" class="w-[20%] h-full object-cover">
@@ -12,11 +11,11 @@
             <img src="{{ url_for('static', filename='concursocertificado.jpg') }}" class="w-[20%] h-full object-cover">
             <img src="{{ url_for('static', filename='concursoprototipos.jpg') }}" class="w-[20%] h-full object-cover">
         </div>
-        <!-- Gradiente decorativo sobre el carrusel -->
+
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
     </div>
 
-    <!-- Texto Institucional: Aplicando Glassmorphism -->
+   
     <div class="backdrop-blur-md bg-gray-900/80 text-white p-10 rounded-3xl shadow-2xl mb-12 flex flex-col md:flex-row items-center gap-10 border border-white/10">
         <div class="flex-1">
             <p class="text-lg leading-relaxed text-gray-200">
