@@ -11,19 +11,23 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         {% set carreras = [
-            {'nombre': 'Ofimática', 'archivo': 'ofimatica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'La carrera de Técnico en Ofimática ofrece las competencias para gestionar hardware, software, bases de datos y establecer comunicación mediante herramientas digitales.'},
-            {'nombre': 'Construcción', 'archivo': 'construccion.jpg', 'titulo': 'PERFIL FISICO-MATEMATICO', 'desc': 'Desempeña funciones en proyectos y diseños de casas habitación, edificaciones comerciales y fábricas, optimizando espacios y eficiencia estructural.'},
-            {'nombre': 'Salud Integral y Estilos de Vida Saludable', 'archivo': 'vida saludable.jpg', 'titulo': 'BACHILLERATO QUÍMICO-BIOLÓGICO', 'desc': 'Egresa con base científica para continuar estudios en Medicina, Enfermería o salud, promoviendo la prevención y el bienestar comunitario.'}
-        {'nombre': 'Contabilidad', 'archivo': 'contabilidad.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Capacitado para manejar sistemas contables y financieros, auditorías, costos, presupuestos y cumplimiento fiscal en diversos sectores.'},
-            {'nombre': 'Urbanismo', 'archivo': 'urbanismo.png', 'titulo': 'PERFIL FISICO-MATEMATICO', 'desc': 'Formación en la planeación y desarrollo de entornos urbanos, análisis de infraestructura, sostenibilidad y diseño de espacios funcionales para el crecimiento comunitario.'},
-            {'nombre': 'Gestión e Innovación Turística', 'archivo': 'gestion e innovacion turistica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Competencias para gestionar proyectos y servicios turísticos utilizando tecnologías de vanguardia y prácticas sostenibles con sentido ético.'},
-            {'nombre': 'E-commerce', 'archivo': 'e-commerce.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Especialízate en operar plataformas digitales de ventas, marketing en línea, logística de distribución y atención al cliente de alta calidad.'}, ] %}
-
+            {'nombre': 'Ofimática', 'archivo': 'ofimatica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'La carrera de Técnico en Ofimática ofrece las competencias para gestionar hardware, software, bases de datos y establecer comunicación mediante herramientas digitales.', 'nueva': false},
+            {'nombre': 'Construcción', 'archivo': 'construccion.jpg', 'titulo': 'PERFIL FISICO-MATEMATICO', 'desc': 'Desempeña funciones en proyectos y diseños de casas habitación, edificaciones comerciales y fábricas, optimizando espacios y eficiencia estructural.', 'nueva': false},
+            {'nombre': 'Contabilidad', 'archivo': 'contabilidad.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Capacitado para manejar sistemas contables y financieros, auditorías, costos, presupuestos y cumplimiento fiscal en diversos sectores.', 'nueva': false},
+            {'nombre': 'Salud Integral y Estilos de Vida Saludable', 'archivo': 'vida saludable.jpg', 'titulo': 'BACHILLERATO QUÍMICO-BIOLÓGICO', 'desc': 'Egresa con base científica para continuar estudios en Medicina, Enfermería o salud, promoviendo la prevención y el bienestar comunitario.', 'nueva': false},
+            {'nombre': 'Urbanismo', 'archivo': 'urbanismo.jpg', 'titulo': 'PERFIL FISICO-MATEMATICO', 'desc': 'Formación en la planeación y desarrollo de entornos urbanos, análisis de infraestructura, sostenibilidad y diseño de espacios funcionales para el crecimiento comunitario.', 'nueva': true},
+            {'nombre': 'Gestión e Innovación Turística', 'archivo': 'gestion e innovacion turistica.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Competencias para gestionar proyectos y servicios turísticos utilizando tecnologías de vanguardia y prácticas sostenibles con sentido ético.', 'nueva': true},
+            {'nombre': 'E-commerce', 'archivo': 'e-commerce.jpg', 'titulo': 'PERFIL ECONOMICO-ADMINISTRATIVO', 'desc': 'Especialízate en operar plataformas digitales de ventas, marketing en línea, logística de distribución y atención al cliente de alta calidad.', 'nueva': true}
+        ] %}
 
         {% for carrera in carreras %}
-        <div class="flip-card w-full h-96 cursor-pointer">
+        <div class="flip-card w-full h-96 cursor-pointer relative">
+            
+            {% if carrera.nueva %}
+            <div class="absolute top-4 right-4 z-10 bg-yellow-400 text-black text-[10px] font-black py-1 px-3 rounded-full shadow-lg uppercase tracking-widest">Nueva</div>
+            {% endif %}
+
             <div class="flip-card-inner w-full h-full transition-transform duration-700 relative preserve-3d">
-                
                 <div class="flip-card-front absolute w-full h-full rounded-2xl shadow-xl overflow-hidden backface-hidden bg-white border-b-4 border-red-800">
                     <img src="{{ url_for('static', filename=carrera.archivo) }}" alt="{{ carrera.nombre }}" class="w-full h-64 object-cover">
                     <div class="p-6 text-center">
